@@ -1,0 +1,61 @@
+<% include ../partials/header %>
+<% include nav %>
+<div class="container">
+    <div class="container-mop-content">
+        <h1>Creating questionnaire</h1>
+        <%if (locals.errors) { %>
+        <%errors.forEach(function(error){ %>
+        <%= error.msg%>
+        <% }); %>
+        <% } %>
+        <form action="/admin/create-questionnaire" method="POST">
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input name="name" type="text" class="form-control" id="title"
+                       placeholder="Questionnaire title">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" name="description" placeholder="Description of questionnaire"></textarea>
+            </div>
+
+            <div class="main-button-holder">
+                <button type="submit" class="main-button">SAVE</button>
+            </div>
+
+
+
+        </form>
+
+        <div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Control</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% questionnaires.forEach(function(questionnaire, key) { %>
+                <tr>
+                    <th scope="row"><%= key +1 %></th>
+                    <td><%= questionnaire.name %></td>
+                    <td><%= questionnaire.description %></td>
+                    <td> <a href="/admin/questionnaire/<%=questionnaire.id%>">Creating page</a></td>
+                    <td> <a href="/admin/edit-questionnaire/<%=questionnaire.id%>">Edit</a></td>
+                    <td> <a href="/admin/delete-questionnaire/<%=questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

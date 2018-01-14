@@ -1,0 +1,59 @@
+<% include ../partials/header %>
+<% include nav %>
+<div class="container">
+    <div class="container-mop-content">
+
+        <h1>Creating Pages</h1>
+        <%if (locals.errors) { %>
+        <%errors.forEach(function(error){ %>
+        <%= error.msg%>
+        <% }); %>
+        <% } %>
+        <form action="/admin/create-pages" method="POST">
+
+            <div class="form-group">
+                <label for="title">Page title:</label>
+                <input name="name" type="text" class="form-control" id="title"
+                       placeholder="Page title">
+
+                <input name="id" type="hidden" class="form-control" value="<%= id %>">
+
+            </div>
+
+            <div class="main-button-holder">
+                <button type="submit" class="main-button">SAVE</button>
+                <a href="/admin/questionnaire" class="back-button">BACK</a>
+            </div>
+
+
+        </form>
+
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Control</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% page_questionnaires.forEach(function(page_questionnaire, key) { %>
+                <tr>
+                    <th scope="row"><%= key +1 %></th>
+                    <td><%= page_questionnaire.name %></td>
+                    <td> <a href="/admin/page/<%=page_questionnaire.id%>">Creating questions</a></td>
+                    <td>  <a href="/admin/edit-page/<%=page_questionnaire.id%>">Edit</a></td>
+                    <td>  <a href="/admin/delete-page/<%=page_questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+
+                </tr>
+                <% }); %>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
+<% include ../partials/footer %>

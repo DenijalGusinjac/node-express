@@ -1,0 +1,33 @@
+<% include ../partials/header %>
+<% include nav %>
+<div class="container">
+    <div class="container-mop-content">
+        <h1>Creating questionnaire</h1>
+        <%if (locals.errors) { %>
+        <%errors.forEach(function(error){ %>
+        <%= error.msg%>
+        <% }); %>
+        <% } %>
+        <% questionnaires.forEach(function(questionnaire, key) { %>
+        <form action="/admin/edit-questionnaire-save/<%= questionnaire.id %>" method="POST">
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input name="name" type="text" class="form-control" id="title"
+                       placeholder="Questionnaire title" value="<%= questionnaire.name %>">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control" name="description" placeholder="Description of questionnaire"><%= questionnaire.description %></textarea>
+            </div>
+
+            <div class="main-button-holder">
+                <button type="submit" class="main-button">SAVE</button>
+            </div>
+
+        </form>
+        <% }); %>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

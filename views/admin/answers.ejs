@@ -1,0 +1,53 @@
+<% include ../partials/header %>
+<% include nav %>
+<div class="container">
+    <div class="container-mop-content">
+
+        <h1>Creating Answers</h1>
+        <%if (locals.errors) { %>
+        <%errors.forEach(function(error){ %>
+        <%= error.msg%>
+        <% }); %>
+        <% } %>
+        <form action="/admin/create-answers" method="POST">
+
+            <div class="form-group">
+                <label for="title">Answer title:</label>
+                <input name="name" type="text" class="form-control" id="title"
+                       placeholder="Answer title">
+
+                <input name="id" type="hidden" class="form-control" value="<%= id %>">
+
+            </div>
+
+            <div class="main-button-holder">
+                <button type="submit" class="main-button">SAVE</button>
+
+                <a href="#" class="back-button">BACK</a>
+            </div>
+
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Control</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% answers.forEach(function(answer,key) { %>
+            <tr>
+                <th scope="row"><%= key +1 %></th>
+                <td><%= answer.name %></td>
+                <td>  <a href="/admin/edit-answer/<%=answer.id%>">Edit</a></td>
+                <td>  <a href="/admin/delete-answer/<%=answer.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+
+            </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% include ../partials/footer %>

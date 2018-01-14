@@ -1,0 +1,29 @@
+{
+  "name": "expresstest",
+  "version": "1.0.0",
+  "description": "simple test",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "async": "^2.6.0",
+    "async-parallel": "^1.2.3",
+    "bcrypt": "^1.0.3",
+    "body-parser": "*",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "*",
+    "express-mysql-session": "^1.2.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "knex": "^0.14.2",
+    "knex-migrate": "^1.5.1",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.14.10",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "author": "D",
+  "license": "ISC"
+}

@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<div class="container">
+    <div class="container-mop-content">
+        <h1>Questionnaire</h1>
+        <form action="/user/answer" method="POST">
+
+            <% questions.forEach(function(question) { %>
+            <input type="hidden" name="page" value="<%= question.page_questionnaire_id %>">
+            <div class="row question-box">
+                <div class="question-heading col-md-12">
+                    <%= question.name %>
+                </div>
+                <div class="answers-box col-md-12">
+                    <%if (question.type_question_id == 1) { %>
+                        <textarea class="form-control" name="text"></textarea>
+                        <input type="hidden" name="textquestion" value="<%= question.id %>">
+                    <% } %>
+                    <%if (question.type_question_id == 2) { %>
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary">
+                            <input type="radio" name="options<%= question.id %>"  value="1" checked> Yes
+                        </label>
+                        <label class="btn btn-primary">
+                            <input type="radio" name="options<%= question.id %>" value="0"> No
+                        </label>
+                        <input type="hidden" name="y_n_questions" value="<%= question.id %>">
+                    </div>
+                    <% } %>
+                    <%if (question.type_question_id == 3) { %>
+                    <div class="btn-group" data-toggle="buttons">
+                        <input type="hidden" name="multiple_questions" value="<%= question.id %>">
+                        <% answers.forEach(function(answer) { %>
+                        <%if (question.id == answer.question_id) { %>
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="multiples" value="<%= answer.answer_id %>" autocomplete="off"> <%= answer.answer_name %>
+
+                        </label>
+                        <% } %>
+                        <% }); %>
+                    </div>
+                    <% } %>
+                    <%if (question.type_question_id == 4) { %>
+
+                                <div class="btn-group" data-toggle="buttons">
+                                    <% answers.forEach(function(answer) { %>
+                                    <%if (question.id == answer.question_id) { %>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="singles" value="<%= answer.answer_id %>"  autocomplete="off"> <%= answer.answer_name %>
+                                        <input type="hidden" name="single_questions" value="<%= question.id %>">
+                                    </label>
+                                    <% } %>
+                                    <% }); %>
+
+                                </div>
+
+                    <% } %>
+                </div>
+            </div>
+            <% }); %>
+            <div class="main-button-holder">
+                <button type="submit" class="main-button">FINISH TEST</button>
+                <a href="/user/profile" class="back-button">BACK</a>
+            </div>
+        </form>
+    </div>
+</div>
+<% include ../partials/footer %>
