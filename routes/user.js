@@ -16,11 +16,11 @@ module.exports = function(router, passport){
     router.get('/profile',function(req, res, next){
 
         const db = require('../db.js');
-
+        const user_id = req.session.passport.user.user_id;
         async.parallel(
             [
                 function(callback){
-                    db.query('SELECT * FROM questionnaires LEFT JOIN user_questionnaires ON questionnaires.id = user_questionnaires.questionnaires_id WHERE user_questionnaires.questionnaires_id IS NULL', function(errors, questionnaires){
+                        db.query("SELECT * FROM questionnaires ", function(errors, questionnaires){
                         callback(errors, questionnaires);
                     })
                 }

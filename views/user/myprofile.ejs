@@ -11,6 +11,8 @@
           Korisnik vidi poruku o uspjesno snimljenom upitniku.
       </div>
     <% questionnaires.forEach(function(questionnaire) { %>
+
+
     <div class="row test-link-holder">
       <div class="col-md-8">
         <a class="test-link" href="/user/questionnaire/<%=questionnaire.id%>"><%= questionnaire.name %></a>

@@ -121,6 +121,8 @@ module.exports = function(router, passport){
                 db.query("INSERT INTO questionnaires (name, description) VALUES(?, ?)", [name, description], function (error, results, fields) {
                     if (error) throw error;
                 });
+
+
             res.redirect('/admin/questionnaire');
 
 
