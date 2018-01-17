@@ -58,7 +58,6 @@ router.post('/register',function(req, res, next){
 	const username = req.body.username;
 	req.checkBody('username', 'Email field required').notEmpty();
 	req.checkBody('username', 'Email field must be in type of email').isEmail()
-	req.checkBody('username', 'Email already exist').isUsernameAvailable()
 	req.checkBody('password', 'Password field required').notEmpty()
 	req.checkBody('password', 'Password must be between 6-50 characters long').len(6,50)
 	req.checkBody('first_name', 'First name field required').notEmpty()
