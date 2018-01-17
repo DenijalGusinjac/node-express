@@ -4,12 +4,7 @@
     <div class="container-mop-content">
 
         <h1>Creating Answers</h1>
-        <%if (locals.errors) { %>
-        <%errors.forEach(function(error){ %>
-        <%= error.msg%>
-        <% }); %>
-        <% } %>
-        <form action="/admin/create-answers" method="POST">
+        <form action="/admin/create/answer" method="POST">
 
             <div class="form-group">
                 <label for="title">Answer title:</label>
@@ -17,7 +12,11 @@
                        placeholder="Answer title">
 
                 <input name="id" type="hidden" class="form-control" value="<%= id %>">
-
+                <%if (locals.errors) { %>
+                <%errors.forEach(function(error){ %>
+                <div class="error-msg"><%= error.msg%></div>
+                <% }); %>
+                <% } %>
             </div>
 
             <div class="main-button-holder">
@@ -41,8 +40,8 @@
             <tr>
                 <th scope="row"><%= key +1 %></th>
                 <td><%= answer.name %></td>
-                <td>  <a href="/admin/edit-answer/<%=answer.id%>">Edit</a></td>
-                <td>  <a href="/admin/delete-answer/<%=answer.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                <td>  <a href="/admin/edit/answer/<%=answer.id%>">Edit</a></td>
+                <td>  <a href="/admin/delete/answer/<%=answer.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
 
             </tr>
             <% }); %>

@@ -3,19 +3,19 @@
 <div class="container">
     <div class="container-mop-content">
         <h1>Creating questions</h1>
-
-        <%if (locals.errors) { %>
-        <%errors.forEach(function(error){ %>
-        <%= error.msg%>
-        <% }); %>
-        <% } %>
-        <form action="/admin/create-questions" method="POST">
+        <form action="/admin/create/question" method="POST">
 
             <div class="form-group">
                 <label for="title">Question title:</label>
                 <input name="name" type="text" class="form-control" id="title"
                        placeholder="Question title">
                 <input type="hidden" name="id" value="<%= id %>">
+
+                <%if (locals.errors) { %>
+                <%errors.forEach(function(error){ %>
+                <div class="error-msg"><%= error.msg%></div>
+                <% }); %>
+                <% } %>
             </div>
 
             <div class="form-group">
@@ -29,7 +29,7 @@
 
             <div class="main-button-holder">
                 <button type="submit" class="main-button">SAVE</button>
-                <a href="/admin/questionnaire>" class="back-button">BACK</a>
+                <a href="/admin/questionnaire" class="back-button">BACK</a>
             </div>
 
         </form>
@@ -54,9 +54,11 @@
                         <td><%= type_question.name %></td>
                         <% } %>
                         <% }); %>
+                        <%if (question.type_question_id == 3 || question.type_question_id == 4) { %>
                         <td> <a href="/admin/question/<%=question.id%>">Add answers</a></td>
-                        <td>  <a href="/admin/edit-question/<%=question.id%>">Edit</a></td>
-                        <td>  <a href="/admin/delete-question/<%=question.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                        <% } %>
+                        <td>  <a href="/admin/edit/question/<%=question.id%>">Edit</a></td>
+                        <td>  <a href="/admin/delete/question/<%=question.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
 
                     </tr>
                     <% }); %>

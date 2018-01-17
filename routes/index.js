@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-//var expressValidator = require('express-validator');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -22,6 +21,8 @@ router.post('/login',passport.authenticate(
 		failureRedirect: '/login',
 
 	}),
+
+
 	function(req, res) {
 
 		const db = require('../db.js');
@@ -53,13 +54,16 @@ router.get('/register',function(req, res, next){
 
 //POST REGISTER
 router.post('/register',function(req, res, next){
-	
-	req.checkBody('username', 'Email field require').notEmpty()
+
+	const username = req.body.username;
+	req.checkBody('username', 'Email field required').notEmpty();
 	req.checkBody('username', 'Email field must be in type of email').isEmail()
-	req.checkBody('password', 'Password field require').notEmpty()
+	req.checkBody('username', 'Email already exist').isUsernameAvailable()
+	req.checkBody('password', 'Password field required').notEmpty()
 	req.checkBody('password', 'Password must be between 6-50 characters long').len(6,50)
-	req.checkBody('first_name', 'First name field require').notEmpty()
-	req.checkBody('last_name', 'Last name field require').notEmpty()
+	req.checkBody('first_name', 'First name field required').notEmpty()
+	req.checkBody('last_name', 'Last name field required').notEmpty()
+
 
 	const errors = req.validationErrors();
 

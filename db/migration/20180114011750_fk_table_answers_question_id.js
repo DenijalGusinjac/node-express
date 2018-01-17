@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.table('answers', function (table) {
         table.integer('question_id').unsigned()
-            .notNullable().references('id').inTable('questions')
+            .notNullable().references('id').inTable('questions').onDelete('CASCADE').onUpdate('CASCADE')
     })
 };
 

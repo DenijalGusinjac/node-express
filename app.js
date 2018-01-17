@@ -13,8 +13,7 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-
-
+var Callback = require('node-callback')
 
 
 //Authentication package
@@ -36,8 +35,15 @@ app.set('views', path.join(__dirname,'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+
+
+
+
 // Express validator
-app.use(expressValidator());
+app.use(expressValidator({
+
+	})
+);
 
 
 // Set Static Path
@@ -88,6 +94,7 @@ passport.use(new LocalStrategy(
 		const db = require('./db');
 		db.query("SELECT id, password FROM users WHERE email =?",[username], function (err, results, fields) {
 			if(err){done(err);}
+
 			if(results.length === 0){
 				 done(null, false)
 			}else{

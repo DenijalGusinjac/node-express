@@ -60,6 +60,10 @@ body {
     background: #ed2028;
     border-radius: 3px;
 }
+.error-msg{
+    color: #ed2028;
+    font-size: 12px;
+}
 footer{
     position: absolute;
     bottom: 0px;
@@ -72,4 +76,9 @@ footer{
     bottom: 0px;
     width: 100%;
     text-align: center;
+}
+.disable-link{
+    padding: 20px;
+    background: beige;
+    border-radius: 3px;
 }

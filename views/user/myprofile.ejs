@@ -1,24 +1,31 @@
 <% include ../partials/header %>
 <% include ../partials/nav %>
 <div class="container">
-  <div class="container-mop-content">
-<h1>Welcome user</h1>
-      <div class="content">
-          Za registraciju korisnika potrebno je samo ime+prezime i email.<br>
-          Nakon prijave korisnika (login), korisnik vidi listu svih raspolozivih upitnika.<br>
-          Po otvaranju upitnika potrebno je prikazati sva pitanja sa ponudjenim odgovorima u zavisnosti od tipa pitanja/odgovora (text, yes-no, multiple choice, single choice)<br>
-          Po zavrsetku upitnika korisnik snima upitnik (svi podaci moraju biti snimljeni u bazu)<br>
-          Korisnik vidi poruku o uspjesno snimljenom upitniku.
-      </div>
-    <% questionnaires.forEach(function(questionnaire) { %>
+    <div class="container-mop-content">
+        <h1>Welcome user</h1>
+
+        <div class="content">
+            Za registraciju korisnika potrebno je samo ime+prezime i email.<br>
+            Nakon prijave korisnika (login), korisnik vidi listu svih raspolozivih upitnika.<br>
+            Po otvaranju upitnika potrebno je prikazati sva pitanja sa ponudjenim odgovorima u zavisnosti od tipa
+            pitanja/odgovora (text, yes-no, multiple choice, single choice)<br>
+            Po zavrsetku upitnika korisnik snima upitnik (svi podaci moraju biti snimljeni u bazu)<br>
+            Korisnik vidi poruku o uspjesno snimljenom upitniku.
+        </div>
+        <% questionnaires.forEach(function(questionnaire, key) { %>
+        <% pages.forEach(function(page) { %>
+        <%if (page.questionnaire_id == questionnaire.id) { %>
+
+            <div class="row test-link-holder">
+                <div class="col-md-8">
+                    <a class="test-link" href="/user/questionnaire/<%=questionnaire.id%>/<%=page.id%>"><%= questionnaire.name %></a>
 
 
-    <div class="row test-link-holder">
-      <div class="col-md-8">
-        <a class="test-link" href="/user/questionnaire/<%=questionnaire.id%>"><%= questionnaire.name %></a>
-      </div>
+                </div>
+            </div>
+        <% } %>
+        <% }); %>
+        <% }); %>
     </div>
-    <% }); %>
-  </div>
-  </div>
+</div>
 <% include ../partials/footer %>

@@ -4,18 +4,17 @@
     <div class="container-mop-content">
 
         <h1>Creating Pages</h1>
-        <%if (locals.errors) { %>
-        <%errors.forEach(function(error){ %>
-        <%= error.msg%>
-        <% }); %>
-        <% } %>
-        <form action="/admin/create-pages" method="POST">
+        <form action="/admin/create/page" method="POST">
 
             <div class="form-group">
                 <label for="title">Page title:</label>
                 <input name="name" type="text" class="form-control" id="title"
                        placeholder="Page title">
-
+                <%if (locals.errors) { %>
+                <%errors.forEach(function(error){ %>
+                <div class="error-msg"><%= error.msg%></div>
+                <% }); %>
+                <% } %>
                 <input name="id" type="hidden" class="form-control" value="<%= id %>">
 
             </div>
@@ -43,8 +42,8 @@
                     <th scope="row"><%= key +1 %></th>
                     <td><%= page_questionnaire.name %></td>
                     <td> <a href="/admin/page/<%=page_questionnaire.id%>">Creating questions</a></td>
-                    <td>  <a href="/admin/edit-page/<%=page_questionnaire.id%>">Edit</a></td>
-                    <td>  <a href="/admin/delete-page/<%=page_questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td>  <a href="/admin/edit/page/<%=page_questionnaire.id%>">Edit</a></td>
+                    <td>  <a href="/admin/delete/page/<%=page_questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
 
                 </tr>
                 <% }); %>

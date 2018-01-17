@@ -3,17 +3,18 @@
 <div class="container">
     <div class="container-mop-content">
         <h1>Creating questionnaire</h1>
-        <%if (locals.errors) { %>
-        <%errors.forEach(function(error){ %>
-        <%= error.msg%>
-        <% }); %>
-        <% } %>
-        <form action="/admin/create-questionnaire" method="POST">
+
+        <form action="/admin/create/questionnaire" method="POST">
 
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input name="name" type="text" class="form-control" id="title"
                        placeholder="Questionnaire title">
+                <%if (locals.errors) { %>
+                <%errors.forEach(function(error){ %>
+                <div class="error-msg"><%= error.msg%></div>
+                <% }); %>
+                <% } %>
             </div>
 
             <div class="form-group">
@@ -40,17 +41,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% questionnaires.forEach(function(questionnaire, key) { %>
-                <tr>
-                    <th scope="row"><%= key +1 %></th>
-                    <td><%= questionnaire.name %></td>
-                    <td><%= questionnaire.description %></td>
-                    <td> <a href="/admin/questionnaire/<%=questionnaire.id%>">Creating page</a></td>
-                    <td> <a href="/admin/edit-questionnaire/<%=questionnaire.id%>">Edit</a></td>
-                    <td> <a href="/admin/delete-questionnaire/<%=questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <% questionnaires.forEach(function(questionnaire, key) { %>
+                    <tr>
+                        <th scope="row"><%= key +1 %></th>
+                        <td><%= questionnaire.name %></td>
+                        <td><%= questionnaire.description %></td>
+                        <td> <a href="/admin/questionnaire/<%=questionnaire.id%>">Creating page</a></td>
+                        <td> <a href="/admin/edit/questionnaire/<%=questionnaire.id%>">Edit</a></td>
+                        <td> <a href="/admin/delete/questionnaire/<%=questionnaire.id%>" onclick="return confirm('Are you sure?')">Delete</a></td>
 
-                </tr>
-                <% }); %>
+                    </tr>
+                    <% }); %>
                 </tbody>
             </table>
 
