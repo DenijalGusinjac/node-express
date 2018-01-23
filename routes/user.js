@@ -97,6 +97,7 @@ module.exports = function (router, passport) {
             return self.indexOf(value) === index;
         }
 
+
         if(new_single_questions != undefined){
             var single_questions = new_single_questions.filter( onlyUnique );
         }else{
@@ -172,10 +173,22 @@ module.exports = function (router, passport) {
                 }
             }
 
+       
+        if(Array.isArray(questionnaire)){
+            var questionnaire_id = questionnaire.filter( onlyUnique )
+        
+    }else{
+        var questionnaire_id = questionnaire
+    }
 
-        const questionnaire_id = questionnaire.filter( onlyUnique )
-        const page_id = page.filter( onlyUnique )
+    if(Array.isArray(page)){
+        var page_id = page.filter( onlyUnique )
+    }else{
+         var page_id = page
+    }
 
+        
+console.log(page_id);
         db.query("SELECT * from page_questionnaires WHERE questionnaire_id =? ORDER BY id DESC", [questionnaire_id], function (error, results, fields) {
             if (error) throw error;
                 if (results[0].id == page_id) {
